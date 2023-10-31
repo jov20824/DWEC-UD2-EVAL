@@ -1,4 +1,4 @@
-export default class carta{
+export default class Carta{
 
     constructor(numero,palo){
         this._numero = numero;

@@ -58,13 +58,13 @@ export default class Partida{
 
             let posicion = prompt("Escriba aqui la posicion de su carta en formato X,X");
             let lista = posicion.split(",");
-            var nFila=lista[0];
-            var nColumna=lista[1];
+            var nFila=parseInt(lista[0]);
+            var nColumna=parseInt(lista[1]);
 
-        }while(nFila>=this._filas | nColumna>=this._columnas)
+        }while(nFila>=this._mazo.length | nColumna>=this._mazo[nColumna].length);
 
-        var carta = this._mazo[nFila][nColumna];
-        console.log(carta.toString())
+        let carta = this._mazo[nFila][nColumna];
+        console.log(carta.toString());
         this._numeroIntentos++;
         this.compruebaAcierto(carta,nFila,nColumna);
     }
@@ -74,19 +74,21 @@ export default class Partida{
 
             let posicion = prompt("Escriba aqui la posicion de su carta en formato X,X");
             let lista = posicion.split(",");
-            var nFila2=lista[0];
-            var nColumna2=lista[1];
+            var nFila2=parseInt(lista[0]);
+            var nColumna2=parseInt(lista[1]);
 
-        }while(nFila>=this._filas | nColumna>=this._columnas);
+        }while(nFila2>=this._mazo.length | nColumna2>=this._mazo[nColumna2].length | (nFila==nFila2 & nColumna==nColumna2));
 
-        var carta2 = this._mazo[nFila2][nColumna2];
+        let carta2 = this._mazo[nFila2][nColumna2];
         console.log(carta2.toString());
-
-        if(carta==carta2){
+        if((carta[0].getNumero())==(carta2[0].getNumero()) && carta[0].getPalo() == carta2[0].getPalo()){
             this._aciertos++;
-            this.mazo[nFila].split(nColumna);
-            this.mazo[nFila2].split(nColumna2);
+            console.log("Ha acertado!!");
+            this._mazo[nFila].splice(nColumna,1);
+            this._mazo[nFila2].splice(nColumna2,1);
             if(this._aciertos>=((this._columnas*this._filas)/2)) this._haFinalizado = true;
+        }else{
+            console.log("Ha fallado!")
         }
         if(this._haFinalizado==false) this.voltea();
         if (this._haFinalizado==true) console.log("Ha ganado");

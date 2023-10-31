@@ -9,7 +9,7 @@ export default class Baraja{
         for(var i=0;i<this._baraja.length;i++){
             this._baraja[i] = new Array(13);
             for(var j=0;j<13;j++){
-                const carta = new Carta();
+                var carta = new Carta();
                 switch(i){
                     case 0:carta.setPalo("PICAS");break;
                     case 1:carta.setPalo("CORAZONES");break;
